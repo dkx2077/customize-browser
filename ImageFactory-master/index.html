@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图像工厂</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>       
+<body>  
+
+	<article class="wrapper">
+		<section class="option">
+			<a href="javascript:void(0)" id="openImg">右键没有图片另存为菜单请点击此处获取图片（图片过大可能会导致浏览器崩溃）</a>
+			<div class="topBtnGroup">
+				<button id="deleteCurImg" class="topBtn">删除图片</button>
+				<button id="resetCurImg" class="topBtn">重置图片</button>
+				<button id="rotate90" class="topBtn">旋转90度</button>
+			</div>
+			<div id="moduleWH">
+				<div id="opt_changeWH" class="opt">
+					<span class="opt_name">指定值修改宽高 -></span>
+					宽：<input type="number" id="changeW">
+					高：<input type="number" id="changeH">
+					<button id="changeWH">确定</button>
+				</div>
+				<br>
+				<div id="opt_followWH" class="opt">
+					<span class="opt_name">按比例修改宽高 -></span>
+					宽（高随比例）：<input type="number" id="followW">
+					<button id="followWW">确定</button>&nbsp;&nbsp;
+					高（宽随比例）：<input type="number" id="followH">
+					<button id="followHH">确定</button>
+				</div>
+			</div>
+			<div id="moduleNB">
+				<div id="opt_changeNB" class="opt">
+					<span class="opt_name">添加圆角 -></span>
+					弧度：<input type="number" id="changeR">
+					<button id="changeRR">确定</button>
+				</div>
+			</div>
+		</section>
+		<section class="viewer">
+			<div class="viewbox">
+				<div class="filer">
+					<div class="spinner">
+						<div class="rect1"></div>
+						<div class="rect2"></div>
+						<div class="rect3"></div>
+						<div class="rect4"></div>
+						<div class="rect5"></div>
+					</div>
+					<div id="preview">
+						<p class="uploadtip">点击上传你的图片</p>
+					</div>      
+			    		<input type="file" id="uploader"/>  
+				</div>
+			</div>
+		</section>
+	</article>
+	<script src="imager.js"></script>
+</body>       
+</html>
