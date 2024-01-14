@@ -1,9 +1,12 @@
 @font-face {
-	font-family:"Lato";src:url("fonts/LatoLatin-Regular.woff")
+	font-family: "Lato";
+	src: url("fonts/LatoLatin-Regular.woff")
 }
 
 @font-face {
-	font-family:"Lato";src:url("fonts/LatoLatin-Bold.woff");font-weight:700
+	font-family: "Lato";
+	src: url("fonts/LatoLatin-Bold.woff");
+	font-weight: 700
 }
 
 * {
@@ -18,10 +21,13 @@ body {
 	/* font-family: 'Lato', sans-serif; */
 	/* color: #eee; */
 	/* background-color: #2c2c2c; */
-	background: url('C:\\Users\\den999\\customize-browser\\localdata\\background.png') no-repeat;
-	/* height: 100vh; */
-	background-size:100% 100%;
-background-attachment: fixed;
+	background: url('../localdata/background.png') no-repeat;
+	background-size: 100% auto;
+    background-attachment: fixed;
+	-webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* 标准语法 */
 }
 
 .container {
@@ -55,7 +61,8 @@ background-attachment: fixed;
 	transition: all 0.2s linear;
 }
 
-.search-box:active,.search-box:focus {
+.search-box:active,
+.search-box:focus {
 	border: 1px solid #fff;
 	box-shadow: 0 0 5px #ddd
 }
@@ -110,32 +117,32 @@ input[type=text]:focus {
 	margin: 0 auto;
 	/* margin-bottom: 30px; */
 	cursor: pointer;
-    /* background-color: blue; */
+	/* background-color: blue; */
 }
 
 .user_message {
-    display: block;
-    /* margin-left: 200px; */
-    /* background-color: yellow; */
-    margin: auto;
+	display: block;
+	/* margin-left: 200px; */
+	/* background-color: yellow; */
+	margin: auto;
 	margin-top: 0px;
 }
 
 .open_exe {
-    width: 300px;
-    height: 200px;
-    /* background-color: white; */
-    margin-left: -310px;
-    /* display: block; */
+	width: 300px;
+	height: 200px;
+	/* background-color: white; */
+	margin-left: -310px;
+	/* display: block; */
 }
 
 .open_exe_title {
-    width: 100%;
+	width: 100%;
 }
 
 .open_exe_item {
-    width: 100%;
-    padding: 5px 0 5px 0px;
+	width: 100%;
+	padding: 5px 0 5px 0px;
 	color: #888;
 	text-decoration: none;
 	display: block;
@@ -144,7 +151,7 @@ input[type=text]:focus {
 	white-space: nowrap;
 	width: 100%;
 	outline: 0;
-    font-size: 30px;
+	font-size: 30px;
 }
 
 .clock .time {
@@ -370,7 +377,8 @@ h1:after {
 	outline: 0
 }
 
-.links a:hover,a:focus {
+.links a:hover,
+a:focus {
 	color: #888
 }
 
@@ -379,7 +387,7 @@ h1:after {
 }
 
 .configurator-appearance {
-	width: 100%!important
+	width: 100% !important
 }
 
 .outer-slides-container {
@@ -463,11 +471,12 @@ h1:after {
 	flex-wrap: wrap
 }
 
-.notes-launcher,.slide-button {
+.notes-launcher,
+.slide-button {
 	height: 40px;
 	width: 100px;
 	border-bottom: 1px solid transparent;
-	color: #593a39;
+	color: #362423;
 	display: inline-block;
 	text-align: center;
 	line-height: 40px;
@@ -479,13 +488,14 @@ h1:after {
 	-moz-user-select: none
 }
 
-.notes-launcher:hover,.slide-button:hover {
+.notes-launcher:hover,
+.slide-button:hover {
 	border-color: #888
 }
 
 .btn-active {
 	color: #fff;
-	border-color: #fff!important
+	border-color: #fff !important
 }
 
 .notes-modal {
@@ -635,7 +645,8 @@ h1:after {
 	font-family: 'Lato'
 }
 
-.button:focus,.button:hover {
+.button:focus,
+.button:hover {
 	color: #fff;
 	border: 1px solid #fff
 }
@@ -833,7 +844,8 @@ input[type=radio]:checked~label {
 	padding: 0 5px
 }
 
-.switch,.switch-tiny {
+.switch,
+.switch-tiny {
 	position: relative;
 	display: inline-block;
 	width: 60px;
@@ -845,7 +857,8 @@ input[type=radio]:checked~label {
 	width: 60px
 }
 
-.switch-tiny input,.switch input {
+.switch-tiny input,
+.switch input {
 	opacity: 0;
 	position: absolute;
 	z-index: 10;
@@ -855,7 +868,8 @@ input[type=radio]:checked~label {
 	margin: 0
 }
 
-.switch-button,.switch-button-tiny {
+.switch-button,
+.switch-button-tiny {
 	position: absolute;
 	cursor: pointer;
 	width: 100%;
@@ -866,7 +880,8 @@ input[type=radio]:checked~label {
 	border-radius: 35px
 }
 
-.switch-button-tiny:before,.switch-button:before {
+.switch-button-tiny:before,
+.switch-button:before {
 	position: absolute;
 	content: "";
 	height: 17px;
@@ -885,7 +900,8 @@ input[type=radio]:checked~label {
 	left: 4px
 }
 
-.switch-tiny:checked+.switch-button-tiny,.switch:checked+.switch-button {
+.switch-tiny:checked+.switch-button-tiny,
+.switch:checked+.switch-button {
 	background-color: #2c2c2c;
 	border-color: #f9f9f9
 }
@@ -978,15 +994,20 @@ input[type=radio]:checked~label {
 
 .choose-box {
 	width: 70px;
-	color: #23262d;
+	color: black;
 }
 
 .choose-box-checked {
 	color: white;
 }
 
-.new_h1{
+.new_h1 {
 	color: white;
 	text-align: center;
 	justify-content: center;
 }
+
+.text-container {
+    background-color: rgba(255, 255, 255, 0.5); /* 半透明白色背景 */
+}
+

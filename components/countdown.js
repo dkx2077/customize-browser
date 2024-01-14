@@ -15,7 +15,7 @@ function countDown(finalDate, finalMessage) {
     var element = document.getElementsByClassName('time-left')[0];
 
     if (time_left < 0) {
-        element.innerHTML = finalMessage;
+        // element.innerHTML = finalMessage;
     } else {
         var in_days = Math.round(time_left / (1000 * 60 * 24 * 60));
         var in_weeks = Math.floor(in_days / 7);

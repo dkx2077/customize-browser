@@ -1,115 +1,80 @@
-// SEARCH BOX - contains code (logic) for search box on the front page
-var ENGINE_LIST = ["baidu","google"]
-var ENGINE = "baidu"; // google or ddg
-var search_box = document.getElementsByClassName('search-box')[0];
-var search_parent = search_box.parentNode;
+// Search Box Logic
+(function () {
+    // 获取搜索框和其父元素
+    const searchBox = document.getElementsByClassName('search-box')[0];
+    const searchParent = searchBox.parentNode;
+    // 设置默认搜索引擎URL
+    let chooseUrl = "https://www.baidu.com/s?wd=";
 
+    // 定义搜索引擎列表
+    const searchEngines = [
+        { id: 'baidu', name: '百度', url: 'https://www.baidu.com/s?wd=' },
+        { id: 'google', name: '谷歌', url: 'https://www.google.com/search?&q=' },
+        { id: 'GoogleScholar', name: '谷歌学术', url: 'https://scholar.google.com/scholar?hl=zh-CN&as_sdt=0%2C5&q=' },
+        { id: 'arxiv', name: 'arxiv', url: 'https://arxiv.org/search/?query=%s&searchtype=all&abstracts=show&order=-announced_date_first&size=50' },
+        { id: 'zhihu', name: '知乎', url: 'https://www.zhihu.com/search?type=content&q=' },
+        { id: 'github', name: 'github', url: 'https://github.com/search?q=' },
+        { id: 'bilibili', name: 'B站', url: 'https://search.bilibili.com/all?keyword=' }
+    ];
 
-var my_choose = [
-    {
-        id: 'baidu',
-        name: "百度",
-        url: "https://www.baidu.com/s?wd="
-    },
-    {
-        id: 'google',
-        name: "谷歌",
-        url: "https://www.google.com/search?&q="
-    },
-    {
-        id: 'zhihu',
-        name: "知乎",
-        url: "https://www.zhihu.com/search?type=content&q="
-    },
-    {
-        id: 'github',
-        name: "github",
-        url: "https://github.com/search?q="
-    },
-    {
-        id: 'bilibili',
-        name: "B站",
-        url: "https://search.bilibili.com/all?keyword="
-    }
-]
+    // 初始化搜索框
+    function initializeSearchBox() {
+        const chooseList = document.querySelector('.choose-list');
+        chooseList.innerHTML = searchEngines.map(engine => {
+            return `<div class="choose-box" data-url="${engine.url}" data-name="${engine.name}" style="height: 30px; text-align: center; line-height: 30px;">${engine.name}</div>`;
+        }).join('');
 
-let choose_list = document.querySelector('.choose-list')
-
-choose_list.innerHTML = my_choose.map(item => {
-    return `<div class="choose-box" data-url="${item['url']}" data-name="${item['name']}" style="height: 30px;">${item['name']}</div>`
-}).join('')
-
-choose_url = "https://www.baidu.com/s?wd=" //默认百度
-document.querySelector('.choose-list').children[0].classList.add('choose-box-checked')
-choose_list.addEventListener('click', function(e){
-    // console.log(e.target.dataset['url']);
-    choose_url = e.target.dataset['url']
-    
-    for (let index = 0; index < document.querySelector('.choose-list').children.length; index++) {
-        if (e.target.dataset['name'] == document.querySelector('.choose-list').children[index].textContent) {
-            document.querySelector('.choose-list').children[index].classList.add('choose-box-checked')
-        }else {
-            document.querySelector('.choose-list').children[index].className = 'choose-box'
-        }       
+        chooseList.children[0].classList.add('choose-box-checked');
+        addEventListeners();
     }
 
-    // search_box.value = "";
-    search_box.focus();
-    
-})
+    // 添加事件监听器
+    function addEventListeners() {
+        // 监听搜索引擎选择列表的点击事件
+        document.querySelector('.choose-list').addEventListener('click', function (event) {
+            const target = event.target;
+            chooseUrl = target.dataset.url;
+            Array.from(this.children).forEach(child => {
+                child.className = (child === target) ? 'choose-box choose-box-checked' : 'choose-box';
+            });
+            searchBox.focus();
+        });
 
-// search box logic
-search_box.onkeypress = function(e) {
-    if (!e) e = window.event;
-    var keyCode = e.keyCode || e.which;
+        // 监听搜索框的键盘按键事件
+        searchBox.addEventListener('keypress', function (event) {
+            // 当按下回车键时执行搜索
+            if (event.key === 'Enter') {
+                const query = encodeURIComponent(searchBox.value);
+                const url = chooseUrl.includes('%s') ? chooseUrl.replace('%s', query) : chooseUrl + query;
+                window.open(url);
+                event.preventDefault();
+            }
+        });
 
-    // if enter key is pressedopen
-    if (keyCode == '13') {
-        // open www.google.com#q=   search_value
-        var query = search_box.value;
-        window.open(choose_url + query); 
-        return false;
+        // 当搜索框失去焦点时移除活动类
+        searchBox.addEventListener('blur', function () {
+            searchParent.classList.remove('search-active');
+        });
+
+        // 当搜索框获得焦点时添加活动类
+        searchBox.addEventListener("focus", function () {
+            searchParent.classList.add('search-active');
+        });
+
+        // Check if searchBox is initially focused
+        if (searchBox === document.activeElement) {
+            searchParent.classList.add('search-active');
+        }
+
+        // Clear search box on 'x' click
+        const searchClear = document.getElementsByClassName('search-clear')[0];
+        searchClear.addEventListener('click', function () {
+            searchBox.value = "";
+            searchBox.focus();
+        });
     }
-};
 
+    // Initialize the search box on page load
+    initializeSearchBox();
+})();
 
-// ** BANGS **
-// shortcuts to common websites
-
-// encoding url (so searching for c++ will actually search for c++ and not for c)
-function createQuery(query) {
-    return encodeURIComponent(query);
-}
-
-// when search box lose focus, remove active class
-search_box.onblur = function(e) {
-    search_parent.classList.remove('search-active');
-};
-
-// when search box gets focus add active class
-search_box.addEventListener("focus", function(e) {
-    search_parent.classList.add('search-active');
-});
-
-// add active class to x pseudo element every time search_box is focused
-if (search_box == document.activeElement) {
-    search_parent.classList.add('search-active');
-}
-
-// clear search box when x pseudo element is clicked
-var searchClear = document.getElementsByClassName('search-clear')[0];
-searchClear.addEventListener('click', function() {
-    search_box.value = "";
-    search_box.focus();
-});
-
-
-// window.onload = ()=> {
-//     if (navigator.onLine) {
-//         console.log("有网");
-//     } else {
-//         console.log("没网");
-//     }
-// }
-
-// console.log(document.querySelector('.search-box'));

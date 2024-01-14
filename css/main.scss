@@ -18,6 +18,7 @@ $modal-box-shadow: 0 0 5px #333;
 $overlay-background: #000;
 // CALENDAR
 $calendar-today: #ddd;
+
 //
 // IMPORT FONTS //
 @font-face {
@@ -761,6 +762,7 @@ input[type=radio]:checked~label {
     .arrow {
         display: none;
     }
+
     .slide {
         padding: 0 10px;
     }

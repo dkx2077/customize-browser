@@ -1,52 +1,59 @@
-// clock.js is used for displaying and managing clock on the front page
+// clock.js 用于在前端页面展示和管理时钟
 
+// 选择时钟元素。使用querySelector替代getElementsByClassName以提高选择器的灵活性和性能。
+var clock = document.querySelector('.user_message');
 
-// var clock = document.getElementsByClassName('clock')[0];
-var clock = document.querySelector('.user_message')
-// show calendar on clock click
-clock.addEventListener('click', function (e) {
-    var target = e.target;
-    calendar.classList.add('visible');
-    overlay.classList.add('visible');
+// // 点击时钟时
+// clock.addEventListener('click', function (e) {
+// });
 
-    // generate calendar if cal-week does not exist => first time opening calendar
-    if (document.getElementsByClassName('cal-week')[0] === undefined) {
-        generateCalendar(0);
-    }
-});
-
-// show and update clock every 2 seconds
+// 每2秒更新并展示时钟
 function showClock() {
     var today = new Date();
-    var hours = today.getHours();
-    var minutes = today.getMinutes();
-    if (hours < 10) {
-        hours = "0" + hours;
-    }
-    if (minutes < 10) {
-        minutes = "0" + minutes;
-    }
-    // display hour in DOM
-    var time = clock.getElementsByClassName('time')[0];
-    time.innerHTML = hours + ":" + minutes;
-    // timeout on each second
-    var t = setTimeout(showClock, 2000);
+    var hours = String(today.getHours()).padStart(2, '0');
+    var minutes = String(today.getMinutes()).padStart(2, '0');
+    
+    // 在DOM中展示时间
+    var time = clock.querySelector('.time');
+    time.innerHTML = `${hours}:${minutes}`;
 
-    // show today's day and month under clock
+    // 每两秒刷新一次
+    setTimeout(showClock, 2000);
+
+    // 在时钟下方展示今天的日期和月份
     showToday();
 }
 
-
-// show today's day and month under clock
+// 在时钟下方展示今天的日期和月份
 function showToday() {
     var today = new Date();
-    var day_name = today.getDay();
+    var year = today.getFullYear();
+    var month = today.getMonth() + 1;
     var day = today.getDate();
-    var month = today.getMonth();
-    var year = today.getFullYear()
-    var date = clock.getElementsByClassName('date')[0];
-    var week = new Date().getDay();  
+    var week = today.getDay();
+    var weeklist = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+    var date = clock.querySelector('.date');
 
-    weeklist = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]
-    date.innerHTML = year + '年 <span style="font-weight:300"> | </span>' + month + '月' + day + '日  ' + weeklist[week]
+    date.innerHTML = `${year}年 <span style="font-weight:300"> | </span>${month}月${day}日  ${weeklist[week]}`;
 }
+
+
+let clickCount = 0;
+let timer;
+
+function resetClickCount() {
+    clearTimeout(timer);
+    clickCount = 0;
+}
+
+document.addEventListener('click', function() {
+    clickCount++;
+    if (clickCount === 1) {
+        timer = setTimeout(resetClickCount, 5000);
+    }
+
+    if (clickCount >= 3) {
+        console.log("Author:dkx\nQQ:1224999366\nhttps://github.com/dkx2077/customize-browser.git");
+        resetClickCount(); // 重置点击次数和计时器
+    }
+});
