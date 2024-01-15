@@ -53,7 +53,7 @@ document.addEventListener('click', function() {
     }
 
     if (clickCount >= 3) {
-        console.log("Author:dkx\nQQ:1224999366\nhttps://github.com/dkx2077/customize-browser.git");
+        console.log("Hello!\nAuthor:den999\nQQ:1224999366\nhttps://github.com/dkx2077/customize-browser.git");
         resetClickCount(); // 重置点击次数和计时器
     }
 });

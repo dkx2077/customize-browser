@@ -67,12 +67,13 @@ leftArrow.addEventListener('click', slideMoveLeft);
 
 // 当搜索框未聚焦时，通过按键左/右移动幻灯片
 var search = document.querySelector('.search');
-document.addEventListener('keypress', function (e) {
+
+document.addEventListener('keydown', function (e) {
     // 如果搜索框未聚焦
     if (!search.classList.contains('search-active')) {
-        if (e.key === "ArrowRight") {
+        if (e.key === "ArrowRight" || e.key === "d" || e.key === "D" || e.key === "Right") { // 添加 'D' 和小键盘右箭头
             slideMoveRight();
-        } else if (e.key === "ArrowLeft") {
+        } else if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A" || e.key === "Left") { // 添加 'A' 和小键盘左箭头
             slideMoveLeft();
         }
     }
